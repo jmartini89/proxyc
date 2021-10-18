@@ -58,12 +58,17 @@ int
 
 	addrlen = sizeof(addr);
 	int new_fd;
+	char buffer[1024];
+	bzero(buffer, 1024);
 	while (1)
 	{
 		new_fd = accept(fd, (struct sockaddr *)&addr, (socklen_t *)&addrlen);
 		if (new_fd == -1)
 			ft_fail("Accept");
 		printf("Activity detected on port %d from %s\n", port, inet_ntoa(addr.sin_addr));
+		if (read(new_fd, buffer, 1024) && *buffer);
+			printf("SERVER: %s\n", buffer);
+		bzero(buffer, 1024);
 		close (new_fd);
 	}
 }
