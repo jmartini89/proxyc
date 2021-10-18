@@ -19,6 +19,10 @@ clean :
 	@$(RM) $(TARGET) $(OBJECTS)
 	@echo "\033[33m"$(NAME)" clean completed\033[0m"
 
+fclean : clean
+	@$(RM) -r $(OBJDIR) $(BINDIR)
+	@echo "\033[33mfull clean completed\033[0m"
+
 re : clean all
 
 debug : CFLAGS += $(DEBUG)
