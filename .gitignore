@@ -3,5 +3,5 @@
 *.a
 .DS_Store
 .vscode/
-.obj/
-.bin/
+obj/
+bin/
