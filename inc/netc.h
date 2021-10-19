@@ -23,11 +23,15 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
-/* functions */
+/* fail */
 void	ft_fail(char *err);
 void	ft_fail_custom(char *err);
-void	ft_init(char **argv, int *fd_listen, int *fd_dst,
-			struct sockaddr_in *addr_listen, struct sockaddr_in *addr_dst, unsigned int addrlen);
-void	ft_proxy(int fd_dst, int fd_listen, struct sockaddr_in *addr_listen, int *addrlen);
+
+/* init sockets */
+void	ft_init_socket_listen(char **argv, int *fd_listen, struct sockaddr_in *addr_listen);
+void	ft_init_socket_connection(char **argv, int *fd_dst, struct sockaddr_in *addr_dst);
+
+/* proxy */
+void	ft_proxy(int fd_dst, int fd_listen, struct sockaddr_in *addr_listen);
 
 #endif
