@@ -5,9 +5,6 @@
 # define HOWTO "Usage: [bin] [destination address] [destination port] [proxy port]\nProxy port is optional. Default: 4242"
 
 /* socket */
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
@@ -22,6 +19,9 @@
 #include <errno.h>
 #include <signal.h>
 #include <sys/wait.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
 /* functions */
 void	ft_fail(char *err);
