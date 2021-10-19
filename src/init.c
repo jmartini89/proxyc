@@ -61,5 +61,5 @@ void
 	if (connect(*fd_dst, (struct sockaddr *)addr_dst, addrlen) == -1)
 		ft_fail("Connect");
 
-	printf("Redirecting to %s:%d\n", dst_address, dst_port);
+	printf("Connected to %s:%d\n", dst_address, dst_port);
 }
