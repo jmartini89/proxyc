@@ -1,22 +1,13 @@
 #include "netc.h"
 
 void
-	ft_proxy(int fd_dst, int fd_listen, struct sockaddr_in *addr_listen)
+	ft_proxy(int fd_src, int fd_dst, int fd_listen)
 {
-	unsigned	addrlen;
-	char		buffer[BUFFER];
-	int			buf_size;
-	int			fd_src;
-	int			pid;
-	int			pid_arr[2];
-	int			id;
-
-	addrlen = sizeof(*addr_listen);
-
-	bzero(buffer, BUFFER);
-	if ((fd_src = accept(
-		fd_listen, (struct sockaddr *)addr_listen, (socklen_t *)&addrlen)) == -1)
-		ft_fail("Accept");
+	char	buffer[BUFFER];
+	int		buf_size;
+	int		pid;
+	int		pid_arr[2];
+	int		id;
 
 	id = 0;
 	while (id <= 1)
@@ -39,7 +30,7 @@ void
 				if ((buf_size = recv(fd_src, buffer, BUFFER, 0)) == -1)
 					ft_fail("client recv");
 				if (!buf_size)
-					ft_fail_custom("client exit");
+					exit (EXIT_SUCCESS);
 				if (send(fd_dst, buffer, buf_size, 0) == -1)
 					ft_fail("client send");
 			}
@@ -51,7 +42,7 @@ void
 				if ((buf_size = recv(fd_dst, buffer, BUFFER, 0)) == -1)
 					ft_fail("server recv");
 				if (!buf_size)
-					ft_fail_custom("server exit");
+					exit (EXIT_SUCCESS);
 				if (send(fd_src, buffer, buf_size, 0) == -1)
 					ft_fail("server send");
 			}
@@ -66,6 +57,9 @@ void
 		id = 0;
 		while (id <= 1 && waitpid(pid_arr[id], NULL, 0))
 			id++;
-		close(fd_src);
 	}
+
+	close(fd_src);
+	close(fd_dst);
+	exit (EXIT_SUCCESS);
 }

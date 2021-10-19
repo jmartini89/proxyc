@@ -32,6 +32,6 @@ void	ft_init_socket_listen(char **argv, int *fd_listen, struct sockaddr_in *addr
 void	ft_init_socket_connection(char **argv, int *fd_dst, struct sockaddr_in *addr_dst);
 
 /* proxy */
-void	ft_proxy(int fd_dst, int fd_listen, struct sockaddr_in *addr_listen);
+void	ft_proxy(int fd_src, int fd_dst, int fd_listen);
 
 #endif
