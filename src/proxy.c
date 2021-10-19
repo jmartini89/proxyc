@@ -1,5 +1,12 @@
 #include "netc.h"
 
+static void
+	ft_sigterm(int pid)
+{
+	printf("sigterm exit\n");
+	exit (EXIT_SUCCESS);
+}
+
 void
 	ft_proxy(int fd_dst, int fd_listen, struct sockaddr_in *addr_listen, int *addrlen)
 {
@@ -10,9 +17,10 @@ void
 	int			pid_arr[2];
 	int			id;
 
+	signal(SIGTERM, ft_sigterm);
 	while (1)
 	{
-
+		printf("START\n");
 		bzero(buffer, BUFFER);
 		if ((fd_src = accept(
 			fd_listen, (struct sockaddr *)addr_listen, (socklen_t *)addrlen)) == -1)
@@ -22,6 +30,8 @@ void
 		while (id <= 1)
 		{
 			pid = fork();
+			if (pid == -1)
+				ft_fail("fork");
 			if (!pid)
 				break ;
 			pid_arr[id] = pid;
@@ -35,9 +45,11 @@ void
 				while (1)
 				{
 					if ((buf_size = recv(fd_src, buffer, BUFFER, 0)) == -1)
-						ft_fail("SRC recv");
+						ft_fail("client recv");
+					if (!buf_size)
+						ft_fail_custom("client exit");
 					if (send(fd_dst, buffer, buf_size, 0) == -1)
-						ft_fail("SRC send");
+						ft_fail("client send");
 				}
 			}
 			if (id == 1)	// SERVER TO CLIENT		DST -> SRC
@@ -45,23 +57,23 @@ void
 				while (1)
 				{
 					if ((buf_size = recv(fd_dst, buffer, BUFFER, 0)) == -1)
-						ft_fail("DST recv");
+						ft_fail("server recv");
+					if (!buf_size)
+						ft_fail_custom("server exit");
 					if (send(fd_src, buffer, buf_size, 0) == -1)
-							ft_fail("DST send");
+						ft_fail("server send");
 				}
 			}
 		}
 
 		else
 		{
-			wait (NULL);
-			kill (pid_arr[0], SIGQUIT);
-			kill (pid_arr[1], SIGQUIT);
-			close (fd_src);
+			wait(NULL);
+			kill(pid_arr[0], SIGTERM);
+			kill(pid_arr[1], SIGTERM);
+			id = 0;
+			while (id <= 1 && waitpid(pid_arr[id], NULL, 0))
+				id++;
 		}
 	}
-
-	close (fd_dst);
-	close (fd_listen);
-	printf("DEBUG\n");
 }

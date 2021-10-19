@@ -33,6 +33,10 @@ static void
 	addr_dst->sin_port = htons(dst_port);
 	if (inet_pton(AF_INET, dst_address, &addr_dst->sin_addr) != 1)
 		ft_fail_custom("Address conversion: Error");
+	if (setsockopt(*fd_dst, SOL_SOCKET,
+		SO_REUSEADDR | SO_REUSEPORT | SO_KEEPALIVE,
+		&optval, sizeof(optval)))
+		ft_fail("Socket options");
 
 	printf("Proxy listening on port %d\nRedirecting to %s:%d\n", src_port, dst_address, dst_port);
 }
