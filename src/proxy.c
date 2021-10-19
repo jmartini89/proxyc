@@ -6,6 +6,7 @@ void
 	char	buffer[BUFFER];
 	int		pid[2];
 	int		id;
+	int		fd;
 
 	id = 0;
 	bzero(pid, sizeof(*pid) * 2);
@@ -18,22 +19,30 @@ void
 	}
 	if (!pid[id])
 	{
-		if (id == 0) // CLIENT TO DST
+		if (id == 0)	// CLIENT TO SERVER		SRC -> DST
 		{
+			fd = open("./debug/client.txt", O_CREAT | O_RDWR,
+				S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);		// debug
 			while (1)
 			{
 				if (recv(fd_src, buffer, BUFFER, 0) == -1)
 					ft_fail("recv SRC");
+				if (write(fd, buffer, BUFFER) == -1)					// debug
+					ft_fail("debug SRC");
 				if (send(fd_dst, buffer, BUFFER, 0) == -1)
 					ft_fail("send SRC");
 			}
 		}
-		if (id == 1) // DST TO CLIENT
+		if (id == 1)	// SERVER TO CLIENT		DST -> SRC
 		{
+			fd = open("./debug/server.txt", O_CREAT | O_RDWR,
+				S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);		// debug
 			while (1)
 			{
 				if (recv(fd_dst, buffer, BUFFER, 0) == -1)
 					ft_fail("recv DST");
+				if (write(fd, buffer, BUFFER) == -1)					// debug
+					ft_fail("debug DST");
 				if (send(fd_src, buffer, BUFFER, 0) == -1)
 						ft_fail("send DST");
 			}

@@ -10,8 +10,11 @@ int
 	struct sockaddr_in	addr_dst;
 	unsigned int		addrlen;
 
+	if (argc < 3)
+		ft_fail_custom(HOWTO);
+
 	addrlen = sizeof(addr_listen);
-	ft_init(argv[1], &fd_listen, &fd_dst, &addr_listen, &addr_dst, addrlen);
+	ft_init(argv, &fd_listen, &fd_dst, &addr_listen, &addr_dst, addrlen);
 
 	if ((fd_src = accept(
 		fd_listen, (struct sockaddr *)&addr_listen, (socklen_t *)&addrlen)) == -1)
