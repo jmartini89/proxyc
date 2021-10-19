@@ -22,7 +22,7 @@ static void
 	addr_listen->sin_port = htons(src_port);
 	addr_listen->sin_addr.s_addr = htonl(INADDR_ANY);
 	if (setsockopt(*fd_listen, SOL_SOCKET,
-		SO_REUSEADDR | SO_REUSEPORT | SO_KEEPALIVE,
+		SO_REUSEADDR | SO_REUSEPORT,
 		&optval, sizeof(optval)))
 		ft_fail("Socket options");
 
@@ -34,7 +34,7 @@ static void
 	if (inet_pton(AF_INET, dst_address, &addr_dst->sin_addr) != 1)
 		ft_fail_custom("Address conversion: Error");
 	if (setsockopt(*fd_dst, SOL_SOCKET,
-		SO_REUSEADDR | SO_REUSEPORT | SO_KEEPALIVE,
+		SO_REUSEADDR | SO_REUSEPORT,
 		&optval, sizeof(optval)))
 		ft_fail("Socket options");
 
@@ -52,7 +52,7 @@ static void
 	if (bind(*fd_listen, (struct sockaddr *)addr_listen, addrlen) == -1)
 		ft_fail("Bind");
 
-	if (listen(*fd_listen, 64) == -1)
+	if (listen(*fd_listen, 1) == -1)
 		ft_fail("Listen");
 
 }

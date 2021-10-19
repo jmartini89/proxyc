@@ -1,9 +1,16 @@
 #include "netc.h"
 
 static void
-	ft_sigterm(int pid)
+	ft_sig_term(int pid)
 {
 	printf("sigterm exit\n");
+	exit (EXIT_SUCCESS);
+}
+
+static void
+	ft_sig_pipe(int pid)
+{
+	printf("sigpipe exit\n");
 	exit (EXIT_SUCCESS);
 }
 
@@ -17,7 +24,8 @@ void
 	int			pid_arr[2];
 	int			id;
 
-	signal(SIGTERM, ft_sigterm);
+	signal(SIGTERM, ft_sig_term);
+	signal(SIGPIPE, ft_sig_pipe);
 	while (1)
 	{
 		printf("START\n");
