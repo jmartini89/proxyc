@@ -15,13 +15,12 @@ void
 	struct stat	statbuf;
 
 	debug = 0;
-	if (stat("debug", &statbuf))
+	if (!stat("./debug", &statbuf))
 	{
 		if (S_ISDIR(statbuf.st_mode))
 		{
-			fd_dbg = open("./debug/client.txt", O_CREAT | O_RDWR,
-				S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
 			debug = 1;
+			printf("DEBUG ON\n");
 		}
 	}
 	/*
@@ -40,6 +39,9 @@ void
 	{
 		if (id == 0)	// CLIENT TO SERVER		SRC -> DST
 		{
+			if (debug)
+				fd_dbg = open("./debug/client.txt", O_CREAT | O_RDWR,
+				S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
 			while (1)
 			{
 				if (recv(fd_src, buffer, BUFFER, 0) == -1)
@@ -52,6 +54,9 @@ void
 		}
 		if (id == 1)	// SERVER TO CLIENT		DST -> SRC
 		{
+			if (debug)
+				fd_dbg = open("./debug/server.txt", O_CREAT | O_RDWR,
+				S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
 			while (1)
 			{
 				if (recv(fd_dst, buffer, BUFFER, 0) == -1)
