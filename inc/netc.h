@@ -28,6 +28,6 @@ void	ft_fail(char *err);
 void	ft_fail_custom(char *err);
 void	ft_init(char **argv, int *fd_listen, int *fd_dst,
 			struct sockaddr_in *addr_listen, struct sockaddr_in *addr_dst, unsigned int addrlen);
-void	ft_proxy(int fd_src, int fd_dst);
+void	ft_proxy(int fd_dst, int fd_listen, struct sockaddr_in *addr_listen, int *addrlen);
 
 #endif
