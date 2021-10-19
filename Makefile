@@ -1,6 +1,7 @@
 NAME = proxy
 CC = gcc
-CFLAGS =
+CFLAGS = $(HEADERS)
+HEADERS = -I./inc
 DEBUG = -g fsanitize=thread
 
 SRCDIR = src
