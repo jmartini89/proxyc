@@ -17,7 +17,6 @@ static void
 static void
 	ft_sig_chld(int pid)
 {
-	printf("%d\n", pid);
 	wait(NULL);
 }
 
