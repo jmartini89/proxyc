@@ -1,7 +1,7 @@
 #ifndef NETC_H
 # define NETC_H
 # define DST_ADDRESS "10.0.10.10"
-# define DST_PORT 22
+# define DST_PORT 80
 # define SRC_PORT 4242
 # define BUFFER 4096
 

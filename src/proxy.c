@@ -18,30 +18,24 @@ void
 	}
 	if (!pid[id])
 	{
-		if (id == 0)
+		if (id == 0) // CLIENT TO DST
 		{
 			while (1)
 			{
 				if (recv(fd_src, buffer, BUFFER, 0) == -1)
 					ft_fail("recv SRC");
-				else
-				{
-					if (send(fd_dst, buffer, BUFFER, 0) == -1)
-						ft_fail("send SRC");
-				}
+				if (send(fd_dst, buffer, BUFFER, 0) == -1)
+					ft_fail("send SRC");
 			}
 		}
-		if (id == 1)
+		if (id == 1) // DST TO CLIENT
 		{
 			while (1)
 			{
 				if (recv(fd_dst, buffer, BUFFER, 0) == -1)
 					ft_fail("recv DST");
-				else
-				{
-					if (send(fd_src, buffer, BUFFER, 0) == -1)
+				if (send(fd_src, buffer, BUFFER, 0) == -1)
 						ft_fail("send DST");
-				}
 			}
 		}
 	}
