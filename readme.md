@@ -7,7 +7,7 @@ Handles multiple simultaneous connections towards a specified `address:port`
 ```
 make
 ```
-simple as that. The binary file is compiled inside `/bin` folder created by `make`
+Simple as that. The binary file is compiled inside `/bin` folder created by `make`
 #
 ### Usage instructions
 ```
