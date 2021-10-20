@@ -31,7 +31,12 @@ void	ft_fail_custom(char *err);
 void	ft_init_socket_listen(char **argv, int *fd_listen, struct sockaddr_in *addr_listen);
 void	ft_init_socket_connection(char **argv, int *fd_dst, struct sockaddr_in *addr_dst);
 
+/* signals */
+
 /* proxy */
 void	ft_proxy(int fd_src, int fd_dst, int fd_listen);
+void	ft_sig_term(int pid);
+void	ft_sig_pipe(int pid);
+void	ft_sig_chld(int pid);
 
 #endif

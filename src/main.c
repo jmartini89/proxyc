@@ -1,25 +1,5 @@
 #include "netc.h"
 
-static void
-	ft_sig_term(int pid)
-{
-	printf("sigterm exit\n");
-	exit (EXIT_SUCCESS);
-}
-
-static void
-	ft_sig_pipe(int pid)
-{
-	printf("sigpipe exit\n");
-	exit (EXIT_SUCCESS);
-}
-
-static void
-	ft_sig_chld(int pid)
-{
-	wait(NULL);
-}
-
 int
 	main (int argc, char **argv)
 {
@@ -33,10 +13,6 @@ int
 
 	if (argc < 3)
 		ft_fail_custom(HOWTO);
-
-	signal(SIGCHLD, ft_sig_chld);
-	signal(SIGTERM, ft_sig_term);
-	signal(SIGPIPE, ft_sig_pipe);
 
 	ft_init_socket_listen(argv, &fd_listen, &addr_listen);
 

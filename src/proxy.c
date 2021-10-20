@@ -9,6 +9,8 @@ void
 	int		pid_arr[2];
 	int		id;
 
+	signal(SIGCHLD, ft_sig_chld);
+
 	id = 0;
 	while (id <= 1)
 	{
@@ -23,6 +25,8 @@ void
 
 	if (!pid)
 	{
+		signal(SIGTERM, ft_sig_term);
+		signal(SIGPIPE, ft_sig_pipe);
 		if (id == 0)	// CLIENT TO SERVER		SRC -> DST
 		{
 			while (1)
