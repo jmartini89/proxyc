@@ -1,4 +1,4 @@
-#include "netc.h"
+#include "proxyc.h"
 
 void
 	ft_init_socket_listen(char **argv, int *fd_listen, struct sockaddr_in *addr_listen)

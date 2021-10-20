@@ -1,4 +1,4 @@
-#include "netc.h"
+#include "proxyc.h"
 
 void
 	ft_sig_term(int pid)

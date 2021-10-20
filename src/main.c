@@ -1,7 +1,7 @@
-#include "netc.h"
+#include "proxyc.h"
 
 int
-	main (int argc, char **argv)
+	main (int argc, char **argv, char **envp)
 {
 	int					fd_listen;
 	int					fd_dst;
@@ -19,6 +19,9 @@ int
 	ft_init_socket_listen(argv, &fd_listen, &addr_listen);
 
 	addrlen = sizeof(addr_listen);
+
+	if (argv[4])
+		ft_exec(argv, envp);
 
 	while (1)
 	{

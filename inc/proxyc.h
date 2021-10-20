@@ -1,5 +1,5 @@
-#ifndef NETC_H
-# define NETC_H
+#ifndef PROXYC_H
+# define PROXYC_H
 # define SRC_PORT 4242
 # define BUFFER 1024
 # define HOWTO "Usage: [bin] [destination address] [destination port] [proxy port]\nProxy port is optional. Default: 4242"
@@ -32,11 +32,14 @@ void	ft_init_socket_listen(char **argv, int *fd_listen, struct sockaddr_in *addr
 void	ft_init_socket_connection(char **argv, int *fd_dst, struct sockaddr_in *addr_dst);
 
 /* signals */
-
-/* proxy */
-void	ft_proxy(int fd_src, int fd_dst, int fd_listen);
 void	ft_sig_term(int pid);
 void	ft_sig_pipe(int pid);
 void	ft_sig_chld(int pid);
+
+/* proxy */
+void	ft_proxy(int fd_src, int fd_dst, int fd_listen);
+
+/* exec */
+void	ft_exec(char **argv, char **envp);
 
 #endif

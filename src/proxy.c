@@ -1,4 +1,4 @@
-#include "netc.h"
+#include "proxyc.h"
 
 static void
 	ft_io(int fd_src, int fd_dst)
