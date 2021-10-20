@@ -14,6 +14,8 @@ int
 	if (argc < 3)
 		ft_fail_custom(HOWTO);
 
+	signal(SIGCHLD, ft_sig_chld);
+
 	ft_init_socket_listen(argv, &fd_listen, &addr_listen);
 
 	addrlen = sizeof(addr_listen);

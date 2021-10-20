@@ -9,7 +9,7 @@ void
 	int		pid_arr[2];
 	int		id;
 
-	signal(SIGCHLD, ft_sig_chld);
+	signal(SIGCHLD, SIG_IGN);
 
 	id = 0;
 	while (id <= 1)
@@ -58,9 +58,8 @@ void
 		wait(NULL);
 		kill(pid_arr[0], SIGTERM);
 		kill(pid_arr[1], SIGTERM);
-		id = 0;
-		while (id <= 1 && waitpid(pid_arr[id], NULL, 0))
-			id++;
+		waitpid(pid_arr[0], NULL, 0);
+		waitpid(pid_arr[1], NULL, 0);
 	}
 
 	close(fd_src);
