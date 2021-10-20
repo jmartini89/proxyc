@@ -2,7 +2,9 @@
 # define PROXYC_H
 # define SRC_PORT 4242
 # define BUFFER 1024
-# define HOWTO "Usage: [bin] [destination address] [destination port] [proxy port]\nProxy port is optional. Default: 4242"
+# define HOWTO1 "Usage: [bin] [destination address] [destination port] [proxy port] [timeout] [exec ...]"
+# define HOWTO2 "Proxy port is optional. Default port is 6969"
+# define HOWTO HOWTO1"\n"HOWTO2
 
 /* socket */
 #include <sys/socket.h>
@@ -40,6 +42,6 @@ void	ft_sig_chld(int pid);
 void	ft_proxy(int fd_src, int fd_dst, int fd_listen);
 
 /* exec */
-void	ft_exec(char **argv, char **envp);
+void	ft_exec(char **argv);
 
 #endif

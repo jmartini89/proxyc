@@ -30,7 +30,7 @@ void
 
 	signal(SIGCHLD, SIG_IGN);
 
-	printf("%d init\n", getpid());
+	printf("PID %d start\n", getpid());
 
 	id = 0;
 	while (id <= 1)
@@ -63,6 +63,6 @@ void
 
 	close(fd_src);
 	close(fd_dst);
-	printf("%d exit\n", getpid());
+	printf("PID %d exit\n", getpid());
 	exit (EXIT_SUCCESS);
 }

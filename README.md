@@ -13,8 +13,8 @@ Simple as that. The binary file is compiled inside `/bin` folder created by `mak
 ```
 proxyc [destination address] [destination port] [proxy port]
 ```
-Proxy port is optional. Default port is `4242`
+Proxy port is optional. Default port is `6969`
 
-Example: `./bin/proxyc 8.8.8.8 22 6969`
+Example: `./bin/proxyc 127.0.0.1 22 6969`
 #
 Use it at your own risk or don't use it at all.
