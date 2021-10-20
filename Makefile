@@ -1,4 +1,4 @@
-NAME = proxy
+NAME = proxyc
 CC = gcc
 CFLAGS = $(HEADERS)
 HEADERS = -I./inc
@@ -7,7 +7,6 @@ DEBUG = -g -fsanitize=thread
 SRCDIR = src
 OBJDIR = obj
 BINDIR = bin
-DBGDIR = debug
 
 SOURCES = $(shell find $(SRCDIR) -name "*.c")
 OBJECTS = $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SOURCES))
@@ -29,7 +28,6 @@ re : clean all
 
 debug : CFLAGS += $(DEBUG)
 debug : all
-	@mkdir -p $(DBGDIR)
 	@echo "\033[31mDEBUG\033[0m"
 
 #Link
