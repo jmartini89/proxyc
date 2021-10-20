@@ -1,6 +1,6 @@
 #ifndef PROXYC_H
 # define PROXYC_H
-# define SRC_PORT 4242
+# define SRC_PORT 6969
 # define BUFFER 1024
 # define HOWTO1 "Usage: [bin] [destination address] [destination port] [proxy port] [timeout] [exec ...]"
 # define HOWTO2 "Proxy port is optional. Default port is 6969"
