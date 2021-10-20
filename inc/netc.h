@@ -1,7 +1,7 @@
 #ifndef NETC_H
 # define NETC_H
 # define SRC_PORT 4242
-# define BUFFER 4096
+# define BUFFER 1024
 # define HOWTO "Usage: [bin] [destination address] [destination port] [proxy port]\nProxy port is optional. Default: 4242"
 
 /* socket */

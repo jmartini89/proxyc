@@ -1,15 +1,36 @@
 #include "netc.h"
 
+static void
+	ft_io(int fd_src, int fd_dst)
+{
+	char	buffer[BUFFER];
+	int		in;
+	int		out;
+
+	while (1)
+	{
+		if ((in = recv(fd_src, buffer, BUFFER, 0)) == -1)
+			ft_fail("client recv");
+		if ((out = send(fd_dst, buffer, in, 0)) == -1)
+			ft_fail("client send");
+		if (out != in)
+			printf("I/O DISCREPANCY");
+		if (!in)
+			exit (EXIT_SUCCESS);
+	}
+}
+
 void
 	ft_proxy(int fd_src, int fd_dst, int fd_listen)
 {
-	char	buffer[BUFFER];
-	int		buf_size;
-	int		pid;
-	int		pid_arr[2];
-	int		id;
+	int	pid;
+	int	pid_arr[2];
+	int	id;
+	int	err;
 
 	signal(SIGCHLD, SIG_IGN);
+
+	printf("%d init\n", getpid());
 
 	id = 0;
 	while (id <= 1)
@@ -22,37 +43,15 @@ void
 		pid_arr[id] = pid;
 		id++;
 	}
-
 	if (!pid)
 	{
 		signal(SIGTERM, ft_sig_term);
 		signal(SIGPIPE, ft_sig_pipe);
-		if (id == 0)	// CLIENT TO SERVER		SRC -> DST
-		{
-			while (1)
-			{
-				if ((buf_size = recv(fd_src, buffer, BUFFER, 0)) == -1)
-					ft_fail("client recv");
-				if (!buf_size)
-					exit (EXIT_SUCCESS);
-				if (send(fd_dst, buffer, buf_size, 0) == -1)
-					ft_fail("client send");
-			}
-		}
-		if (id == 1)	// SERVER TO CLIENT		DST -> SRC
-		{
-			while (1)
-			{
-				if ((buf_size = recv(fd_dst, buffer, BUFFER, 0)) == -1)
-					ft_fail("server recv");
-				if (!buf_size)
-					exit (EXIT_SUCCESS);
-				if (send(fd_src, buffer, buf_size, 0) == -1)
-					ft_fail("server send");
-			}
-		}
+		if (id == 0)	// client to server
+			ft_io(fd_src, fd_dst);
+		if (id == 1)	// server to client
+			ft_io(fd_dst, fd_src);
 	}
-
 	else
 	{
 		wait(NULL);
@@ -64,5 +63,6 @@ void
 
 	close(fd_src);
 	close(fd_dst);
+	printf("%d exit\n", getpid());
 	exit (EXIT_SUCCESS);
 }

@@ -26,7 +26,7 @@ void
 	/* EXECUTE */
 	if (bind(*fd_listen, (struct sockaddr *)addr_listen, addrlen) == -1)
 		ft_fail("Bind");
-	if (listen(*fd_listen, 1) == -1)
+	if (listen(*fd_listen, 128) == -1)
 		ft_fail("Listen");
 
 	printf("Proxy listening on port %d\n", src_port);
@@ -61,5 +61,5 @@ void
 	if (connect(*fd_dst, (struct sockaddr *)addr_dst, addrlen) == -1)
 		ft_fail("Connect");
 
-	printf("Connected to %s:%d\n", dst_address, dst_port);
+	// printf("Connected to %s:%d\n", dst_address, dst_port);
 }
