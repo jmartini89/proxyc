@@ -33,10 +33,10 @@ it's executed through `systemctl` when activity is detected on `proxy listening 
 
 #
 ### Why?
-Why not! Fun little project to learn a lot about TCP and sockets<br />
-I was searching for something like this. A friend suggested to write it myself and here we are<br />
-It's intended to be used as a daemonized process on a headless server: no more wasted power, run those processes only when *actually* needed!<br />
-Very eco-friendly if you ask me<br />
+Why not! Fun little project to learn a lot about TCP and sockets.<br />
+I was searching for something like this. A friend suggested to write it myself and here we are.<br />
+It's intended to be used as a daemonized process on a headless server: no more wasted power, run those processes only when *actually* needed! Very eco-friendly if you ask me!<br />
+It patiently waits for a user to show up, then gently executes the process the client was asking for, forwarding the connection<br />
 *MAGIC*
 
 #
