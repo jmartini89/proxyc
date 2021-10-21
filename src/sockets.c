@@ -1,7 +1,7 @@
 #include "proxyc.h"
 
 void
-	ft_init_socket_listen(char **argv, int *fd_listen, struct sockaddr_in *addr_listen)
+	ft_socket_tcp_listen(char **argv, int *fd_listen, struct sockaddr_in *addr_listen)
 {
 	int			optval;
 	int			src_port;
@@ -31,7 +31,7 @@ void
 }
 
 void
-	ft_init_socket_connection(char **argv, int *fd_dst, struct sockaddr_in *addr_dst)
+	ft_socket_tcp_connect(char **argv, int *fd_dst, struct sockaddr_in *addr_dst)
 {
 	int			optval;
 	int			dst_port;

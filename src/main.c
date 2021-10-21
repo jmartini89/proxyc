@@ -17,7 +17,7 @@ int
 
 	ft_thread(&thread);
 
-	ft_init_socket_listen(argv, &fd_listen, &addr_listen);
+	ft_socket_tcp_listen(argv, &fd_listen, &addr_listen);
 
 	addrlen = sizeof(addr_listen);
 
@@ -25,7 +25,7 @@ int
 
 	while (1)
 	{
-		ft_init_socket_connection(argv, &fd_dst, &addr_dst);
+		ft_socket_tcp_connect(argv, &fd_dst, &addr_dst);
 
 		if ((fd_src = accept(
 			fd_listen, (struct sockaddr *)&addr_listen, (socklen_t *)&addrlen)) == -1)
