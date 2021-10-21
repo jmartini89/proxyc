@@ -40,7 +40,7 @@ static void
 {
 	while (1)
 	{
-		usleep(500);	// DEBUG STOOPED FAST
+		sleep(60);
 
 		pthread_mutex_lock(&thread->mutex);
 		ft_supervisor_pid(thread);
@@ -49,28 +49,12 @@ static void
 	}
 }
 
-// static void
-// 	ft_thread_sig(t_thread *thread)
-// {
-// 	sigset_t	set;
-// 	int			sig;
-
-// 	sigaddset(&set, SIGINT);
-// 	if (sigwait(&set, &sig))
-// 		ft_fail("sigwait");
-// 	fprintf(stderr, "SIGINT INTERCEPTED\n");
-// 	exit (EXIT_SUCCESS);
-// }
-
 void
 	ft_thread(t_thread *thread)
 {
-	// pthread_t	thread_sig;
-
 	thread->pid_arr = NULL;
 	thread->active_conn = 0;
 	thread->active_exec = 0;
 	pthread_mutex_init(&thread->mutex, NULL);
 	pthread_create(&thread->thread, NULL, (void *)ft_thread_sup, thread);
-	// pthread_create(&thread_sig, NULL, (void *)ft_thread_sig, thread);
 }

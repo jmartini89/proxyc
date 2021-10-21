@@ -6,13 +6,11 @@ int
 	pid_t	pid;
 
 	char			*start[4] = {
-	// "sudo",
 	"service",
 	thread->service_name,
 	"start",
 	};
 	char			*stop[4] = {
-	// "sudo",
 	"service",
 	thread->service_name,
 	"stop",

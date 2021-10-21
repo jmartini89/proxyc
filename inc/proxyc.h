@@ -64,7 +64,5 @@ void	ft_fail_custom(char *err);
 /* pid update */
 void	ft_pid_lst_remove(t_thread *thread, pid_t pid);
 void	ft_pid_lst_add(t_thread *thread, pid_t pid);
-/* time */
-long int	ft_time_elapsed_ms(struct timeval t0, struct timeval t1);
 
 #endif
