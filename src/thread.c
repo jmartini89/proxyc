@@ -43,8 +43,8 @@ static void
 		sleep(60);
 
 		pthread_mutex_lock(&thread->mutex);
-		ft_supervisor_pid(thread);
 		ft_supervisor_prog(thread);
+		ft_supervisor_pid(thread);
 		pthread_mutex_unlock(&thread->mutex);
 	}
 }
