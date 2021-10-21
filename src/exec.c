@@ -6,14 +6,14 @@ int
 	pid_t	pid;
 
 	char			*start[4] = {
-	"service",
-	thread->service_name,
+	"systemctl",
 	"start",
+	thread->service_name,
 	};
 	char			*stop[4] = {
-	"service",
-	thread->service_name,
+	"systemctl",
 	"stop",
+	thread->service_name,
 	};
 
 	pid = fork();
