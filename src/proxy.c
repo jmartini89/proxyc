@@ -21,7 +21,7 @@ static void
 }
 
 void
-	ft_proxy(int fd_src, int fd_dst, int fd_listen)
+	ft_proxy(int fd_src, int fd_dst)
 {
 	int	pid;
 	int	pid_arr[2];

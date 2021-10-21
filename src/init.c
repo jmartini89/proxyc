@@ -7,9 +7,7 @@ void
 	int			src_port;
 	unsigned	addrlen;
 
-	src_port = SRC_PORT;
-	if (argv[3])
-		src_port = atoi(argv[3]);
+	src_port = atoi(argv[3]);
 	addrlen = sizeof(*addr_listen);
 
 	/* SOCKET INIT */

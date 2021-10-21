@@ -1,6 +1,6 @@
 NAME = proxyc
 CC = gcc
-CFLAGS = $(HEADERS)
+CFLAGS = $(HEADERS) -pthread
 HEADERS = -I./inc
 DEBUG = -g -fsanitize=thread
 
