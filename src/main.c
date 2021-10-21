@@ -39,6 +39,7 @@ int
 		if (!pid)
 			ft_proxy(fd_src, fd_dst);
 
+		/* MUTEX PID */
 		pthread_mutex_lock(&thread.mutex);
 		ft_pid_lst_add(&thread, pid);
 		pthread_mutex_unlock(&thread.mutex);

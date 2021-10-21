@@ -29,6 +29,7 @@ typedef struct s_thread
 	pthread_mutex_t	mutex;
 	pid_t			*pid_arr;
 	int				active_conn;
+	int				prog_exec;
 }	t_thread;
 
 
