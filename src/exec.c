@@ -5,14 +5,14 @@ int
 {
 	pid_t	pid;
 
-	char			*start[5] = {
-	"sudo",
+	char			*start[4] = {
+	// "sudo",
 	"service",
 	thread->service_name,
 	"start",
 	};
-	char			*stop[5] = {
-	"sudo",
+	char			*stop[4] = {
+	// "sudo",
 	"service",
 	thread->service_name,
 	"stop",
@@ -34,10 +34,13 @@ int
 		exit (EXIT_SUCCESS);
 	}
 
+	if (waitpid(pid, NULL, 0) == -1)
+		ft_fail("waitpid execvp");
+
 	if (cmd == START)
-		fprintf(stderr, "%s start\n", start[2]);
+		fprintf(stderr, "exec: %s start\n", thread->service_name);
 	if (cmd == STOP)
-		fprintf(stderr, "%s stop\n", stop[2]);
+		fprintf(stderr, "exec: %s stop\n", thread->service_name);
 
 	return (cmd);
 }
