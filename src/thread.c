@@ -5,13 +5,22 @@ static void
 {
 	struct timeval	t1;
 	time_t			elapsed;
+	static int		log;
 
 	if (thread->active_conn == 0 && thread->active_exec == 1)
 	{
+		if (log == 0)
+		{
+			fprintf(stderr, "INACTIVITY TIMER STARTED\n");
+			log = 1;
+		}
 		gettimeofday(&t1, NULL);
 		elapsed = t1.tv_sec - thread->t0.tv_sec;
 		if (elapsed > thread->service_timeout)
+		{
 			thread->active_exec = ft_exec(thread, STOP);
+			log = 0;
+		}
 	}
 	if (thread->active_conn && thread->active_exec == 0)
 		thread->active_exec = ft_exec(thread, START);
