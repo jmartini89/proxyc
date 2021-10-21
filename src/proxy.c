@@ -15,7 +15,7 @@ static void
 			ft_fail("client send");
 		if (out != in)
 			fprintf(stderr, "I/O DISCREPANCY");
-		if (!in)
+		if (in == 0)
 			exit (EXIT_SUCCESS);
 	}
 }
@@ -37,12 +37,12 @@ void
 		pid = fork();
 		if (pid == -1)
 			ft_fail("fork");
-		if (!pid)
+		if (pid == 0)
 			break ;
 		pid_arr[id] = pid;
 		id++;
 	}
-	if (!pid)
+	if (pid == 0)
 	{
 		signal(SIGTERM, ft_sig_term_proxy);
 		signal(SIGPIPE, ft_sig_pipe_proxy);

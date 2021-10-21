@@ -67,7 +67,7 @@ int
 		if (pid == -1)
 			ft_fail("fork");
 
-		if (!pid)
+		if (pid == 0)
 			ft_proxy(fd_src, fd_dst);
 
 		pthread_mutex_lock(&thread.mutex);
