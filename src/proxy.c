@@ -30,7 +30,7 @@ void
 
 	signal(SIGCHLD, SIG_IGN);
 
-	fprintf(stderr, "proxy: %d init\n", getpid());
+	fprintf(stderr, "PID %d proxy: init\n", getpid());
 	id = 0;
 	while (id <= 1)
 	{
@@ -62,6 +62,6 @@ void
 
 	close(fd_src);
 	close(fd_dst);
-	fprintf(stderr, "proxy: %d exit\n", getpid());
+	fprintf(stderr, "PID %d proxy: exit\n", getpid());
 	exit (EXIT_SUCCESS);
 }
