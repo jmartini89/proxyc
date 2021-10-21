@@ -58,6 +58,4 @@ void
 	/* EXECUTE */
 	if (connect(*fd_dst, (struct sockaddr *)addr_dst, addrlen) == -1)
 		ft_fail("connect");
-
-	printf("Connected to %s:%d\n", dst_address, dst_port);
 }

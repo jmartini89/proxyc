@@ -23,42 +23,39 @@
 #include <fcntl.h>
 #include <pthread.h>
 
-typedef struct s_list
-{
-	pid_t			pid;
-	struct s_list	*next;
-	struct s_list	*prev;
-}	t_list;
-
 typedef struct s_thread
 {
-	pthread_t		init;
+	pthread_t		thread;
 	pthread_mutex_t	mutex;
-	t_list			*list;
+	pid_t			*pid_arr;
+	int				active_conn;
 }	t_thread;
 
-/* fail */
-void	ft_fail(char *err);
-void	ft_fail_custom(char *err);
 
-/* init sockets */
+/*
+* sockets
+*/
 void	ft_init_socket_listen(char **argv, int *fd_listen, struct sockaddr_in *addr_listen);
 void	ft_init_socket_connection(char **argv, int *fd_dst, struct sockaddr_in *addr_dst);
+
+/* proxy */
+void	ft_proxy(int fd_src, int fd_dst);
+
+/* thread */
+void	ft_thread(t_thread *thread);
+
+/* exec */
+void	ft_exec(char **argv);
 
 /* signals */
 void	ft_sig_term(int sig);
 void	ft_sig_pipe(int sig);
 void	ft_sig_chld(int sig);
-
-/* proxy */
-void	ft_proxy(int fd_src, int fd_dst);
-
-/* exec */
-void	ft_exec(char **argv);
-
-/* lists */
-t_list	*ft_lstnew(pid_t pid);
-t_list	*ft_lstlast(t_list *lst);
-void	ft_lstadd(t_list **lst, t_list *new);
+/* fail */
+void	ft_fail(char *err);
+void	ft_fail_custom(char *err);
+/* pid update */
+void	ft_pid_lst_remove(t_thread *thread, pid_t pid);
+void	ft_pid_lst_add(t_thread *thread, pid_t pid);
 
 #endif
