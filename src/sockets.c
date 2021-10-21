@@ -27,7 +27,7 @@ void
 	if (listen(*fd_listen, 128) == -1)
 		ft_fail("listen");
 
-	printf("Proxy listening on port %d\n", src_port);
+	fprintf(stderr, "Proxy listening on port %d\n", src_port);
 }
 
 void

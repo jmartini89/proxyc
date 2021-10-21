@@ -15,7 +15,7 @@ void
 	tmp[thread->active_conn - 1] = pid;
 	free (thread->pid_arr);
 	thread->pid_arr = tmp;
-	printf("%d added to supervisor\n", pid);
+	fprintf(stderr, "%d added to supervisor\n", pid);
 }
 
 void
@@ -46,5 +46,5 @@ void
 	if (thread->active_conn == 0)
 		thread->pid_arr = NULL;
 	thread->pid_arr = tmp;
-	printf("%d removed from supervisor\n", pid);
+	fprintf(stderr, "%d removed from supervisor\n", pid);
 }

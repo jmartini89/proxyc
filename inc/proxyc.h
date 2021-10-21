@@ -34,10 +34,10 @@ typedef struct s_thread
 	pid_t			*pid_arr;
 
 	int				active_conn;
-	int				prog_exec;
+	int				active_exec;
 
 	int				service_timeout;
-	char			*service_process;
+	char			*service_name;
 	struct timeval	t0;
 }	t_thread;
 

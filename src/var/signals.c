@@ -3,14 +3,14 @@
 void
 	ft_sig_term_proxy(int sig)
 {
-	printf("sigterm exit\n");
+	fprintf(stderr, "sigterm exit\n");
 	exit (EXIT_SUCCESS);
 }
 
 void
 	ft_sig_pipe_proxy(int sig)
 {
-	printf("sigpipe exit\n");
+	fprintf(stderr, "sigpipe exit\n");
 	exit (EXIT_SUCCESS);
 }
 

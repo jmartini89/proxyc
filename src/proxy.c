@@ -14,7 +14,7 @@ static void
 		if ((out = send(fd_dst, buffer, in, 0)) == -1)
 			ft_fail("client send");
 		if (out != in)
-			printf("I/O DISCREPANCY");
+			fprintf(stderr, "I/O DISCREPANCY");
 		if (!in)
 			exit (EXIT_SUCCESS);
 	}
@@ -30,7 +30,7 @@ void
 
 	signal(SIGCHLD, SIG_IGN);
 
-	printf("%d init\n", getpid());
+	fprintf(stderr, "%d init\n", getpid());
 	id = 0;
 	while (id <= 1)
 	{
@@ -62,6 +62,6 @@ void
 
 	close(fd_src);
 	close(fd_dst);
-	printf("%d exit\n", getpid());
+	fprintf(stderr, "%d exit\n", getpid());
 	exit (EXIT_SUCCESS);
 }

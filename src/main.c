@@ -17,17 +17,17 @@ static void
 	if (argc == 6 && valid)
 	{
 		thread->service_timeout = atoi(argv[4]) * 60;
-		thread->service_process = argv[5];
-		printf("----------------------------\n");
-		printf("*** SERVICE MODE ENABLED ***\n");
-		printf("TIMEOUT:\t%d minutes\n", thread->service_timeout / 60);
-		printf("PROCESS:\t%s\n", thread->service_process);
-		printf("----------------------------\n");
+		thread->service_name = argv[5];
+		fprintf(stderr, "----------------------------\n");
+		fprintf(stderr, "*** SERVICE MODE ENABLED ***\n");
+		fprintf(stderr, "TIMEOUT:\t%d minutes\n", thread->service_timeout / 60);
+		fprintf(stderr, "PROCESS:\t%s\n", thread->service_name);
+		fprintf(stderr, "----------------------------\n");
 	}
 	else
 	{
 		thread->service_timeout = 0;
-		thread->service_process = NULL;
+		thread->service_name = NULL;
 	}
 }
 

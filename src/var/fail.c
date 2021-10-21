@@ -10,6 +10,6 @@ void
 void
 	ft_fail_custom(char *err)
 {
-	fprintf(stderr, "%s\n", err);
+	ffprintf(stderr, stderr, "%s\n", err);
 	exit (EXIT_FAILURE);
 }

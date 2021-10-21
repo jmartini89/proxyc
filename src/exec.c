@@ -8,13 +8,13 @@ int
 	char			*start[5] = {
 	"sudo",
 	"service",
-	thread->service_process,
+	thread->service_name,
 	"start",
 	};
 	char			*stop[5] = {
 	"sudo",
 	"service",
-	thread->service_process,
+	thread->service_name,
 	"stop",
 	};
 
@@ -35,9 +35,9 @@ int
 	}
 
 	if (cmd == START)
-		printf("%s start\n", start[2]);
+		fprintf(stderr, "%s start\n", start[2]);
 	if (cmd == STOP)
-		printf("%s stop\n", stop[2]);
+		fprintf(stderr, "%s stop\n", stop[2]);
 
 	return (cmd);
 }
