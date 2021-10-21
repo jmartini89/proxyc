@@ -1,37 +1,45 @@
 #ifndef PROXYC_H
 # define PROXYC_H
 # define BUFFER 1024
+# define START 1
+# define STOP 0
 # define HOWTO "Usage: proxyc [destination address] [destination port] [proxy listening port]"
 
 /* socket */
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-#include <netinet/in.h>
-#include <netinet/ip.h>
+# include <sys/socket.h>
+# include <netinet/in.h>
+# include <arpa/inet.h>
+# include <netinet/in.h>
+# include <netinet/ip.h>
 
 /**/
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <string.h>
-#include <errno.h>
-#include <signal.h>
-#include <sys/wait.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <pthread.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <stdio.h>
+# include <string.h>
+# include <errno.h>
+# include <signal.h>
+# include <sys/wait.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+# include <pthread.h>
+# include <ctype.h>
+# include <sys/time.h>
 
 typedef struct s_thread
 {
 	pthread_t		thread;
 	pthread_mutex_t	mutex;
 	pid_t			*pid_arr;
+
 	int				active_conn;
 	int				prog_exec;
-}	t_thread;
 
+	int				service_timeout;
+	char			*service_process;
+	struct timeval	t0;
+}	t_thread;
 
 /*
 * sockets
@@ -44,13 +52,11 @@ void	ft_proxy(int fd_src, int fd_dst);
 
 /* thread */
 void	ft_thread(t_thread *thread);
-
-/* exec */
-void	ft_exec(char **argv);
+int		ft_exec(t_thread *thread, int cmd);
 
 /* signals */
-void	ft_sig_term(int sig);
-void	ft_sig_pipe(int sig);
+void	ft_sig_term_proxy(int sig);
+void	ft_sig_pipe_proxy(int sig);
 void	ft_sig_chld(int sig);
 /* fail */
 void	ft_fail(char *err);
@@ -58,5 +64,7 @@ void	ft_fail_custom(char *err);
 /* pid update */
 void	ft_pid_lst_remove(t_thread *thread, pid_t pid);
 void	ft_pid_lst_add(t_thread *thread, pid_t pid);
+/* time */
+long int	ft_time_elapsed_ms(struct timeval t0, struct timeval t1);
 
 #endif

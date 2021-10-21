@@ -1,28 +1,43 @@
 #include "proxyc.h"
 
-void
-	ft_exec(char **argv)
+int
+	ft_exec(t_thread *thread, int cmd)
 {
-	unsigned	timeout;
-	int			pid;
+	pid_t	pid;
 
-	if (argv[4])
-		timeout = atoi(argv[4]);
+	char			*start[5] = {
+	"sudo",
+	"service",
+	thread->service_process,
+	"start",
+	};
+	char			*stop[5] = {
+	"sudo",
+	"service",
+	thread->service_process,
+	"stop",
+	};
 
 	pid = fork();
 
 	if (pid == -1)
 		ft_fail("fork");
 
-	if (!pid)
+	if (pid == 0)
 	{
-		if (execvp(argv[5], &argv[5]) == -1)
-			ft_fail("execvp");
+		if (cmd == START)
+			if (execvp(start[0], start) == -1)
+				ft_fail("execvp");
+		if (cmd == STOP)
+			if (execvp(stop[0], stop) == -1)
+				ft_fail("execvp");
+		exit (EXIT_SUCCESS);
 	}
 
-	waitpid(pid, NULL, WUNTRACED);
+	if (cmd == START)
+		printf("%s start\n", start[2]);
+	if (cmd == STOP)
+		printf("%s stop\n", stop[2]);
 
-	printf("Process \"%s\" launched, sleeping for %us\n", argv[5], timeout);
-
-	sleep(timeout);
+	return (cmd);
 }

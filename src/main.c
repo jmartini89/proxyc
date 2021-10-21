@@ -1,5 +1,36 @@
 #include "proxyc.h"
 
+static void
+	ft_service_args(t_thread *thread, int argc, char **argv)
+{
+	int	i;
+	int	valid;
+
+	i = 0;
+	valid = 1;
+	while (argv[4][i])
+	{
+		if (isdigit(argv[4][i]) == 0)
+			valid = 0;
+		i++;
+	}
+	if (argc == 6 && valid)
+	{
+		thread->service_timeout = atoi(argv[4]) * 60;
+		thread->service_process = argv[5];
+		printf("----------------------------\n");
+		printf("*** SERVICE MODE ENABLED ***\n");
+		printf("TIMEOUT:\t%d minutes\n", thread->service_timeout / 60);
+		printf("PROCESS:\t%s\n", thread->service_process);
+		printf("----------------------------\n");
+	}
+	else
+	{
+		thread->service_timeout = 0;
+		thread->service_process = NULL;
+	}
+}
+
 int
 	main (int argc, char **argv)
 {
@@ -15,13 +46,13 @@ int
 	if (argc < 4)
 		ft_fail_custom(HOWTO);
 
+	ft_service_args(&thread, argc, argv);
+
 	ft_thread(&thread);
 
 	ft_socket_tcp_listen(argv, &fd_listen, &addr_listen);
 
 	addrlen = sizeof(addr_listen);
-
-	signal(SIGCHLD, ft_sig_chld);
 
 	while (1)
 	{

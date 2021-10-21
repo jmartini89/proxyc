@@ -30,6 +30,7 @@ void
 
 	signal(SIGCHLD, SIG_IGN);
 
+	printf("%d init\n", getpid());
 	id = 0;
 	while (id <= 1)
 	{
@@ -43,8 +44,8 @@ void
 	}
 	if (!pid)
 	{
-		signal(SIGTERM, ft_sig_term);
-		signal(SIGPIPE, ft_sig_pipe);
+		signal(SIGTERM, ft_sig_term_proxy);
+		signal(SIGPIPE, ft_sig_pipe_proxy);
 		if (id == 0)	// client to server
 			ft_io(fd_src, fd_dst);
 		if (id == 1)	// server to client

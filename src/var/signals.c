@@ -1,14 +1,14 @@
 #include "proxyc.h"
 
 void
-	ft_sig_term(int sig)
+	ft_sig_term_proxy(int sig)
 {
 	printf("sigterm exit\n");
 	exit (EXIT_SUCCESS);
 }
 
 void
-	ft_sig_pipe(int sig)
+	ft_sig_pipe_proxy(int sig)
 {
 	printf("sigpipe exit\n");
 	exit (EXIT_SUCCESS);
