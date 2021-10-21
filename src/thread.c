@@ -33,5 +33,5 @@ void
 	thread->pid_arr = NULL;
 	thread->active_conn = 0;
 	pthread_mutex_init(&thread->mutex, NULL);
-	pthread_create(&thread->thread, NULL, (void *)ft_thread, &thread);
+	pthread_create(&thread->thread, NULL, (void *)ft_routine, thread);
 }
