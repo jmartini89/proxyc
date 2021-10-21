@@ -40,7 +40,7 @@ static void
 {
 	while (1)
 	{
-		sleep(60);
+		usleep(500);
 
 		pthread_mutex_lock(&thread->mutex);
 		ft_supervisor_prog(thread);
