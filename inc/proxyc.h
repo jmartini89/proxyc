@@ -1,8 +1,6 @@
 #ifndef PROXYC_H
 # define PROXYC_H
 # define BUFFER 1024
-# define START 1
-# define STOP 0
 # define HOWTO "Usage: proxyc [destination address] [destination port] [proxy listening port]"
 
 /* socket */
@@ -53,7 +51,7 @@ void	ft_proxy(int fd_src, int fd_dst);
 
 /* thread */
 void	ft_thread(t_thread *thread);
-int		ft_exec(t_thread *thread, int cmd);
+void	ft_exec(t_thread *thread, char *cmd);
 
 /* signals */
 void	ft_sig_term_proxy(int sig);

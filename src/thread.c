@@ -16,10 +16,16 @@ static void
 		gettimeofday(&t1, NULL);
 		elapsed = t1.tv_sec - thread->t0.tv_sec;
 		if (elapsed > thread->service_timeout)
-			thread->active_exec = ft_exec(thread, STOP);
+		{
+			ft_exec(thread, "stop");
+			thread->active_exec = 0;
+		}
 	}
 	if (thread->active_conn && thread->active_exec == 0)
-		thread->active_exec = ft_exec(thread, START);
+	{
+		ft_exec(thread, "start");
+		thread->active_exec = 1;
+	}
 }
 
 static void

@@ -1,23 +1,16 @@
 #include "proxyc.h"
 
-int
-	ft_exec(t_thread *thread, int cmd)
+void
+	ft_exec(t_thread *thread, char *cmd)
 {
 	pid_t	pid;
 
-	char	*start = "start";
-	char	*stop = "stop";
 	char	*argv[4] = {
 	"systemctl",
-	NULL,
+	cmd,
 	thread->service_name,
 	NULL
 	};
-
-	if (cmd == START)
-		argv[1] = start;
-	if (cmd == STOP)
-		argv[1] = stop;
 
 	pid = fork();
 
@@ -35,10 +28,5 @@ int
 		ft_fail("waitpid execvp");
 
 	/* LOG */
-	if (cmd == START)
-		fprintf(stderr, "exec: %s start\n", thread->service_name);
-	if (cmd == STOP)
-		fprintf(stderr, "exec: %s stop\n", thread->service_name);
-
-	return (cmd);
+	fprintf(stderr, "exec: %s %s\n", thread->service_name, cmd);
 }
