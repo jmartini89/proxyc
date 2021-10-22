@@ -39,6 +39,7 @@ typedef struct s_thread
 	int				service_timeout;
 	char			*service_name;
 	struct timeval	t0;
+	int				log_time;
 }	t_thread;
 
 /*
