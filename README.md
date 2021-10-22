@@ -32,6 +32,11 @@ starts at last client disconnection, at goal closes `systemd service name` (if i
 it's executed through `systemctl` when activity is detected on `proxy listening port` and no client is connected at the moment
 
 #
+### Compatibility
+* Written and tested on Linux using the GNU C Library
+* Behaviour with BSD Library is undefined
+
+#
 ### Why?
 Why not! Fun little project to learn a lot about TCP and sockets.<br />
 I was searching for something like this. A friend suggested to write it myself and here we are.<br />
