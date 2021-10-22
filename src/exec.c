@@ -9,11 +9,13 @@ int
 	"systemctl",
 	"start",
 	thread->service_name,
+	NULL
 	};
 	char			*stop[4] = {
 	"systemctl",
 	"stop",
 	thread->service_name,
+	NULL
 	};
 
 	pid = fork();
