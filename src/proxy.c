@@ -10,9 +10,9 @@ static void
 	while (1)
 	{
 		if ((in = recv(fd_src, buffer, BUFFER, 0)) == -1)
-			ft_fail("client recv");
+			ft_fail("recv");
 		if ((out = send(fd_dst, buffer, in, 0)) == -1)
-			ft_fail("client send");
+			ft_fail("send");
 		if (out != in)
 			fprintf(stderr, "I/O DISCREPANCY");
 		if (in == 0)
@@ -26,11 +26,10 @@ void
 	int	pid;
 	int	pid_arr[2];
 	int	id;
-	int	err;
 
 	signal(SIGCHLD, SIG_IGN);
+	fprintf(stderr, "proxy: %d init\n", getpid());
 
-	fprintf(stderr, "PID %d proxy: init\n", getpid());
 	id = 0;
 	while (id <= 1)
 	{
@@ -62,6 +61,6 @@ void
 
 	close(fd_src);
 	close(fd_dst);
-	fprintf(stderr, "PID %d proxy: exit\n", getpid());
+	fprintf(stderr, "proxy: %d exit\n", getpid());
 	exit (EXIT_SUCCESS);
 }

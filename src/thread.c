@@ -54,7 +54,8 @@ static void
 		usleep(500);
 
 		pthread_mutex_lock(&thread->mutex);
-		ft_supervisor_prog(thread);
+		if (thread->service_name)
+			ft_supervisor_prog(thread);
 		ft_supervisor_pid(thread);
 		pthread_mutex_unlock(&thread->mutex);
 	}

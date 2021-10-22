@@ -19,7 +19,7 @@ void
 	/* LOG */
 	if (thread->active_conn)
 		thread->log_time = 0;
-	fprintf(stderr, "PID %d thread: added to supervisor\n", pid);
+	fprintf(stderr, "thread: %d added to supervisor\n", pid);
 }
 
 void
@@ -54,5 +54,5 @@ void
 	/* LOG */
 	if (thread->active_conn == 0)
 		thread->log_time = 1;
-	fprintf(stderr, "PID %d thread: removed from supervisor\n", pid);
+	fprintf(stderr, "thread: %d removed from supervisor\n", pid);
 }

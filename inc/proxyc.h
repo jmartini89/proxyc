@@ -53,6 +53,10 @@ void	ft_proxy(int fd_src, int fd_dst);
 void	ft_thread(t_thread *thread);
 void	ft_exec(t_thread *thread, char *cmd);
 
+/* pid list */
+void	ft_pid_lst_remove(t_thread *thread, pid_t pid);
+void	ft_pid_lst_add(t_thread *thread, pid_t pid);
+
 /* signals */
 void	ft_sig_term_proxy(int sig);
 void	ft_sig_pipe_proxy(int sig);
@@ -60,8 +64,7 @@ void	ft_sig_chld(int sig);
 /* fail */
 void	ft_fail(char *err);
 void	ft_fail_custom(char *err);
-/* pid update */
-void	ft_pid_lst_remove(t_thread *thread, pid_t pid);
-void	ft_pid_lst_add(t_thread *thread, pid_t pid);
+/* log */
+void	ft_log_addr(struct sockaddr_in *addr);
 
 #endif

@@ -62,6 +62,8 @@ int
 			fd_listen, (struct sockaddr *)&addr_listen, (socklen_t *)&addrlen)) == -1)
 			ft_fail("accept");
 
+		ft_log_addr(&addr_listen);
+
 		pid = fork();
 
 		if (pid == -1)
