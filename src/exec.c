@@ -5,18 +5,19 @@ int
 {
 	pid_t	pid;
 
-	char			*start[4] = {
+	char	*start = "start";
+	char	*stop = "stop";
+	char	*argv[4] = {
 	"systemctl",
-	"start",
+	NULL,
 	thread->service_name,
 	NULL
 	};
-	char			*stop[4] = {
-	"systemctl",
-	"stop",
-	thread->service_name,
-	NULL
-	};
+
+	if (cmd == START)
+		argv[1] = start;
+	if (cmd == STOP)
+		argv[1] = stop;
 
 	pid = fork();
 
@@ -25,18 +26,15 @@ int
 
 	if (pid == 0)
 	{
-		if (cmd == START)
-			if (execvp(start[0], start) == -1)
-				ft_fail("execvp");
-		if (cmd == STOP)
-			if (execvp(stop[0], stop) == -1)
-				ft_fail("execvp");
+		if (execvp(argv[0], argv) == -1)
+			ft_fail("execvp");
 		exit (EXIT_SUCCESS);
 	}
 
 	if (waitpid(pid, NULL, 0) == -1)
 		ft_fail("waitpid execvp");
 
+	/* LOG */
 	if (cmd == START)
 		fprintf(stderr, "exec: %s start\n", thread->service_name);
 	if (cmd == STOP)
