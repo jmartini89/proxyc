@@ -8,7 +8,7 @@ static void
 
 	i = 0;
 	valid = 1;
-	while (argv[4][i])
+	while (argv[4] && argv[4][i])
 	{
 		if (isdigit(argv[4][i]) == 0)
 			valid = 0;
